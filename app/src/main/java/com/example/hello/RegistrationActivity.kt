@@ -11,6 +11,7 @@ class RegistrationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_registration)
         btnSignUp.setOnClickListener {
             var firstname = etFirstName.text.toString()
+            var lastname=etFirstName.text.toString()
             var email = etEmail.text.toString()
             var phoneNumber = etPhone.text.toString()
             var password = etPassword.text.toString()

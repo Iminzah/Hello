@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
      btnLogin.setOnClickListener{
          var userName=etUsername.text.toString()
          var password=etPassword.text.toString()
-         Toast.makeText(baseContext,password,Toast.LENGTH_SHORT).show()
+         Toast.makeText(baseContext,password,LENGTH_SHORT).show()
 
      }
     }
