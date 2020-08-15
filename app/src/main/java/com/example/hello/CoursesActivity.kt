@@ -1,35 +1,35 @@
-package com.example.hello
+package ke.co.hello
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.row_courses_item.*
+import com.example.hello.Courses
+import com.example.hello.CoursesAdapterViewRecycler
+import com.example.hello.R
+import kotlinx.android.synthetic.main.activity_courses.*
 
-data class Courses(val course_id: Int, val course_name: String, val course_code: Int, val instructor:String, val description:String)
-
-
-class CoursesActivity : AppCompatActivity() {
+class CoursesActivity<Courses> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_courses)
+        var courseList = listOf<com.example.hello.Courses>(
+            Courses("34", "UI/UX", "1000", "NYANDIA", "Design"),
+            Courses("15", "JavaScript", "45678", "Purity", "React"),
+            Courses(
+                "36",
+                "Entrepreneurship",
+                "500234",
+                "Gatwiri",
+                "Problem Space"
+            ),
+            Courses("56", "Html/css", "6789", "Jeff", "Wireframes"),
+            Courses("90", "Kotlin", "6543", "John", "mobile dev"),
+            Courses("34", "Nav", "1234", "Vero", "Life"),
+            Courses("89", "professional", "0987", "Owoko", "CV")
 
-        rvCourses.layoutManager = LinearLayoutManager(baseContext)
-        val coursesRecyclerViewAdapter = CoursesRecyclerViewAdapter(coursesList = listOf(
-
-            Courses(34,"Python",113,"James Mwai","Excellent"),
-            Courses(35,"Kotlin",112,"John Owuor","Excellent"),
-            Courses(36,"Javascript",111,"Purity Maina","Excellent"),
-            Courses(37,"UI/UX Development",110,"Jeff Muthondu","Excellent"),
-            Courses(38,"React",109,"Purity maina","Excellent"),
-            Courses(39,"Navigating",108,"Vero Thamaini","Excellent"),
-            Courses(40,"Proffessional development",107,"Rodgers Owoko","Excellent"),
-            Courses(41,"UI/UX Design",106,"Nyandia Kamawe","Excellent"),
-            Courses(42,"Entreprenuership",105,"Kelly Murungi","Excellent"),
-            Courses(43,"Hardware Design",104,"Barre Yasin","Excellent"),
-            Courses(44,"Hardware Electronics",103,"Barre Yasin","Excellent")
-
-
-        ))
-        rvCourses.adapter=coursesRecyclerViewAdapter
+        )
+        tvCourses.layoutManager = LinearLayoutManager(baseContext)
+        tvCourses.adapter = CoursesAdapterViewRecycler(courseList)
     }
 }
+
