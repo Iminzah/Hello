@@ -1,10 +1,10 @@
-package com.example.hello
+package ke.co.hello
+
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-object APiClient {
+object ApiClient {
     var client = OkHttpClient.Builder().build()
 
     var retrofit = Retrofit.Builder()

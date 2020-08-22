@@ -1,15 +1,22 @@
-package com.example.hello
-import ke.co.hello.RegistrationResponse
+package ke.co.hello
+
+import com.example.hello.CoursesResponse
+import com.example.hello.LoginResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface APiInterface {
+
+interface ApiInterface {
     @POST("register")
     fun registerStudent(@Body requestBody: RequestBody): Call<RegistrationResponse>
-}
 
-class RequestBody {
+    @POST("login")
+    fun loginStudent(@Body requestBody: RequestBody): Call<LoginResponse>
 
+    @GET("courses")
+    fun getCourses(@Header("Authorization") accessToken: String): Call<CoursesResponse>
 }

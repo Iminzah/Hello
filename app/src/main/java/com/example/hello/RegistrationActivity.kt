@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ke.co.hello.ApiClient
+import ke.co.hello.ApiInterface
 import ke.co.hello.RegistrationResponse
 import kotlinx.android.synthetic.main.activity_registration.*
 
@@ -13,6 +15,9 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+
+
 
 class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +30,7 @@ class RegistrationActivity : AppCompatActivity() {
             val email = etEmail.text.toString()
             val phoneNumber = etPhone.text.toString()
             val password = etPassword.text.toString()
-            val passwordConfirmation = etConfirmPassword.text.toString()
+            val confirm = etConfirmPassword.text.toString()
 
             var requestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -64,12 +69,4 @@ class RegistrationActivity : AppCompatActivity() {
             }
         })
     }
-}
-
-object ApiClient {
-
-}
-
-interface ApiInterface {
-
 }

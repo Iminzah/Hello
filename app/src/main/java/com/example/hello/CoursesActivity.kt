@@ -28,8 +28,8 @@ class CoursesActivity<Courses> : AppCompatActivity() {
             Courses("89", "professional", "0987", "Owoko", "CV")
 
         )
-        tvCourses.layoutManager = LinearLayoutManager(baseContext)
-        tvCourses.adapter = CoursesAdapterViewRecycler(courseList)
+        rvCourses.layoutManager = LinearLayoutManager(baseContext)
+        rvCourses.adapter = CoursesAdapterViewRecycler(courseList)
     }
 }
 
