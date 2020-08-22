@@ -1,9 +1,11 @@
 package com.example.hello
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.TextUtils.isEmpty
 import android.widget.Toast
 import android.widget.Toast.*
 import ke.co.hello.ApiClient
@@ -15,6 +17,7 @@ import okhttp3.Call
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.Response
+import java.util.jar.Attributes
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +32,19 @@ class MainActivity : AppCompatActivity() {
          var userName=etUsername.text.toString()
          var password=etPassword.text.toString()
          Toast.makeText(baseContext,password,LENGTH_SHORT).show()
+
+         if(!!Attributes.Name.isBlank() || !!Attributes.Name.isEmpty()){
+             etUsername.error="This field  is required"
+         }
+         if(password.isBlank() || password.isEmpty()){
+             etPassword.error="Password is required"
+         }
+
+         progressBar.max=5000
+         val currentProgress=700
+         ObjectAnimator.ofInt(progressBar,"progress",currentProgress)
+             .setDuration(4000)
+             .start()
          val requestBody = MultipartBody.Builder()
              .setType(MultipartBody.FORM)
              .addFormDataPart("userName",userName)
