@@ -1,23 +1,22 @@
 package com.example.hello
 
-import android.animation.ObjectAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.text.TextUtils.isEmpty
+import android.view.View
 import android.widget.Toast
-import android.widget.Toast.*
+import android.widget.Toast.Callback
+import androidx.appcompat.app.AppCompatActivity
 import ke.co.hello.ApiClient
 import ke.co.hello.ApiInterface
 import ke.co.hello.CoursesActivity
 import ke.co.hello.R
+import ke.co.hello.models.LoginResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.Call
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.Response
-import java.util.jar.Attributes
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,60 +30,67 @@ class MainActivity : AppCompatActivity() {
      btnLogin.setOnClickListener{
          var userName=etUsername.text.toString()
          var password=etPassword.text.toString()
-         Toast.makeText(baseContext,password,LENGTH_SHORT).show()
+         var error = false
 
-         if(!!Attributes.Name.isBlank() || !!Attributes.Name.isEmpty()){
-             etUsername.error="This field  is required"
-         }
-         if(password.isBlank() || password.isEmpty()){
-             etPassword.error="Password is required"
+         if (email.isBlank() || email.isEmpty()) {
+             error = true
+             etUsername.error = "Email is required"
          }
 
-         progressBar.max=5000
-         val currentProgress=700
-         ObjectAnimator.ofInt(progressBar,"progress",currentProgress)
-             .setDuration(4000)
-             .start()
+         if (password.isBlank() || password.isEmpty()) {
+             error = true
+             etPassword.error = "Password is required"
+         }
+
          val requestBody = MultipartBody.Builder()
              .setType(MultipartBody.FORM)
-             .addFormDataPart("userName",userName)
+             .addFormDataPart("email", email)
              .addFormDataPart("password", password)
              .build()
 
-         loginUser(requestBody)
+         if (!error) {
+             pbLogin.visibility = View.VISIBLE
+             loginUser(requestBody)
+         }
      }
     }
 
-    fun loginUser(requestBody: RequestBody){
+    fun loginUser(requestBody: RequestBody) {
         val apiClient = ApiClient.buildService(ApiInterface::class.java)
         val loginCall = apiClient.loginStudent(requestBody)
 
-        loginCall.enqueue(object :Callback<LoginResponse!>! {
+        loginCall.enqueue(object : Callback<LoginResponse> {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
+                pbLogin.visibility = View.GONE
             }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
+                    val pbLogin = null
+                    pbLogin.visibility = View.GONE
                     Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG).show()
+
                     var accessToken = response.body()?.accessToken
-                    var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
+                    val studentId = response.body().studentId
+                    var sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(baseContext)
                     var editor = sharedPreferences.edit()
                     editor.putString("ACCESS_TOKEN_KEY", accessToken)
+                    editor.putString("STUDENT_ID_KEY", studentId)
                     editor.apply()
                     val intent = Intent(baseContext, CoursesActivity::class.java)
                     startActivity(intent)
                     finish()
-                }
-                else{
-                    Toast.makeText(baseContext, response.errorBody().toString(), Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(baseContext, response.errorBody().toString(), Toast.LENGTH_LONG)
+                        .show()
                 }
             }
         })
     }
 }
 
+private fun Any.enqueue(any: Any) {
 
-
-
-
+}

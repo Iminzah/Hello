@@ -1,9 +1,9 @@
-package ke.co.hello
+package ke.co.hello.models
 
-import com.example.hello.Student
 import com.google.gson.annotations.SerializedName
 
-data class RegistrationResponse(
+data class LoginResponse(
+    @SerializedName("access_token") var accessToken: String,
     @SerializedName("message") var message: String,
-    @SerializedName("student") var student: Student
+    @SerializedName("student_id") var studentId: String
 )

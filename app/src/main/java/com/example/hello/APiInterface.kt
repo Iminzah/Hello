@@ -1,7 +1,9 @@
-package ke.co.hello
 
-import com.example.hello.CoursesResponse
-import com.example.hello.LoginResponse
+package com.example.hello
+
+import com.example.hello.RegistrationResponse
+import ke.co.hello.models.CoursesResponse
+import ke.co.hello.models.LoginResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body

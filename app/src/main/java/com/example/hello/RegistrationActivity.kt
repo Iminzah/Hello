@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ke.co.hello.ApiClient
 import ke.co.hello.ApiInterface
+import ke.co.hello.R
 import ke.co.hello.RegistrationResponse
 import kotlinx.android.synthetic.main.activity_registration.*
 
