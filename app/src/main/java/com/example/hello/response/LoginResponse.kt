@@ -1,4 +1,4 @@
-package ke.co.hello.models
+package com.example.hello.response
 
 import com.google.gson.annotations.SerializedName
 

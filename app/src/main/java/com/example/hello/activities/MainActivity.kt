@@ -1,4 +1,4 @@
-package com.example.hello
+package com.example.hello.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,11 @@ import android.view.View
 import android.widget.Toast
 import android.widget.Toast.Callback
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hello.api.ApiInterface
+import com.example.hello.response.LoginResponse
 import ke.co.hello.ApiClient
-import ke.co.hello.ApiInterface
-import ke.co.hello.CoursesActivity
+import com.example.hello.activities.CoursesActivity
 import ke.co.hello.R
-import ke.co.hello.models.LoginResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.Call
 import okhttp3.MultipartBody
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tvRegister.setOnClickListener {
-            val intent=Intent(baseContext,RegistrationActivity::class.java)
+            val intent=Intent(baseContext, RegistrationActivity::class.java)
             startActivity(intent)
         }
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
          var password=etPassword.text.toString()
          var error = false
 
-         if (email.isBlank() || email.isEmpty()) {
+         if (userName.isBlank() || userName.isEmpty()) {
              error = true
              etUsername.error = "Email is required"
          }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
          val requestBody = MultipartBody.Builder()
              .setType(MultipartBody.FORM)
-             .addFormDataPart("email", email)
+             .addFormDataPart("email", userName)
              .addFormDataPart("password", password)
              .build()
 

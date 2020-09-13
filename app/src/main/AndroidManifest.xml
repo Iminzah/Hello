@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.hello.CoursesActivity" />
+        <activity android:name="com.example.hello.activities.CoursesActivity" />
         <activity android:name=".activites.RegistrationActivity" />
         <activity android:name=".activites.MainActivity">
 

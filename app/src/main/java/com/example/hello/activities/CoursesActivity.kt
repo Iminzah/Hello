@@ -1,4 +1,4 @@
-package com.example.hello
+package com.example.hello.activities
 
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -6,13 +6,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.example.hello.Courses
+import com.example.hello.api.ApiInterface
+import com.example.hello.models.Course
 import ke.co.hello.ApiClient
-import ke.co.hello.ApiInterface
 import ke.co.hello.R
-import ke.co.hello.api.ApiClient
+import com.example.hello.api.ApiClient
 import ke.co.hello.database.HelloDatabase
-import ke.co.hello.models.Course
 import ke.co.hello.models.CoursesResponse
 import kotlinx.android.synthetic.main.activity_courses.*
 import retrofit2.Call
@@ -69,7 +68,8 @@ class CoursesActivity : AppCompatActivity(), CourseClickListener {
     }
 
     fun displayCourses(courses: List<Course>){
-        var coursesAdapter = CoursesAdapterViewRecycler(courses, this)
+        var coursesAdapter =
+            CoursesAdapterViewRecycler(courses, this)
         rvCourses.layoutManager = LinearLayoutManager(baseContext)
         rvCourses.adapter = coursesAdapter
     }

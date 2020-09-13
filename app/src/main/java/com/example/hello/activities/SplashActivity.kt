@@ -1,10 +1,9 @@
-package com.example.hello
+package com.example.hello.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.preference.PreferenceManager
-import ke.co.hello.CoursesActivity
 import ke.co.hello.R
 
 

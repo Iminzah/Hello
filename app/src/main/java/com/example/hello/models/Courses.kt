@@ -1,4 +1,4 @@
-package ke.co.hello.models
+package com.example.hello.models
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
